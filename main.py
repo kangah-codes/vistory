@@ -67,33 +67,52 @@ def Nmaxelements(list1, N):
 		if i not in items:
 			items.append(i)
 	items.sort(reverse=True)
-	return items[0:10]
+	return items[0:5]
 
 def plotData(browser):
 	final_items = []
 	final_item = []
 
-	parse_hist.sort(reverse=True)
+	parse_hist.sort()
 
-	for i in parse_hist[0:500]:
+
+	for i in parse_hist[::-1][0:1000]:
 		if i not in final_items:
-			final_items.append([parse_hist[0:500].count(i), i])
+			final_items.append([parse_hist[::-1][0:1000].count(i), i])
+
+	print(final_items)
 	for i in final_items:
 		if i not in final_item:
 			final_item.append(i)
 
-	dict_of_vals = { i[1] : i[0] for i in Nmaxelements(final_item, 10) }
+
+	dict_of_vals = { i[1] : i[0] for i in Nmaxelements(final_item, 5) }
 
 	names = list(dict_of_vals.keys())
 	names1 = []
+	names2 = []
+	names3 = []
 	# bad code
 	for i in names:
 		names1.append(i.split('.com'))
+	for i in names1:
+		a = i[0].split('https://')
+		names2.append(a[1].split('www.'))
+	for i in names2:
+		try:
+			if i[0] == '':
+				names3.append(i[1])
+			else:
+				names3.append(i[0])
+
+		except:
+			pass
+			
 	vals = list(dict_of_vals.values())
 
 	plot.style.use('ggplot')
 
-	x = names
+	x = names3
 	y = vals
 
 	x_pos = [i for i, _ in enumerate(x)]
@@ -103,7 +122,7 @@ def plotData(browser):
 	plot.ylabel("Visits")
 	plot.title("Most visited sites in browser history")
 
-	plot.xticks(x_pos, names)
+	plot.xticks(x_pos, names3)
 
 	plot.show()
 
