@@ -80,7 +80,6 @@ def plotData(browser):
 		if i not in final_items:
 			final_items.append([parse_hist[::-1][0:1000].count(i), i])
 
-	print(final_items)
 	for i in final_items:
 		if i not in final_item:
 			final_item.append(i)
@@ -107,9 +106,9 @@ def plotData(browser):
 
 		except:
 			pass
-			
-	vals = list(dict_of_vals.values())
 
+	vals = list(dict_of_vals.values())
+	fig = plot.figure(figsize=(10, 5))
 	plot.style.use('ggplot')
 
 	x = names3
