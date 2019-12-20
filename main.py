@@ -28,15 +28,22 @@ def findHistory():
 	guizero.Text(box, text="Available browsers")
 	guizero.Text(box, text=" ")
 	for i in history.keys():
-		guizero.Text(box, text=" ")
 		guizero.PushButton(box, text=f"Read data from {i}", command=getHistory, args=[i])
 
 def getHistory(browser):
 	hist = []
-	hist.append(f"{_[0]}//{_[2]}" for _ in history[browser].split('/'))
-	print(hist)
+	for i in history[browser]:
+		hist.append(i[0].split('/'))
 
+	parse_hist = []
+	for i in hist:
+		parse_hist.append(f"{i[0]}//{i[2]}")
 
-if __name__ == '__main__':
+	hist_window.show()
+	guizero.Text(hist_window, text=f"History for {browser}")
+	guizero.Text(hist_window, text=f" ")
+	guizero.ListBox(hist_window, items=parse_hist, width="fill")
+
+if __name__ == '__main__':	
 	main()
 	app.display()
