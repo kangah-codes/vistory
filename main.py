@@ -4,6 +4,9 @@ import guizero
 from guizero import Window
 import matplotlib.pyplot as plot
 import browserhistory as bh
+import platform
+
+allowed_png = ["Linux", "Windows"]
 
 box = None
 history = None
@@ -16,6 +19,11 @@ hist_window = Window(app, title="History")
 hist_window.hide()
 
 def main():
+	if platform.system() not in allowed_png:
+		# for macos
+		guizero.Picture(app, image="images/logo.gif")
+	else:
+		guizero.Picture(app, image="images/logo.png")
 	guizero.Text(app, text=" ")
 	guizero.Text(app, text="Visualize browser history")
 	guizero.Text(app, text=" ")
