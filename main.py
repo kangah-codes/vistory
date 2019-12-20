@@ -29,7 +29,7 @@ def findHistory():
 	guizero.Text(box, text=" ")
 	for i in history.keys():
 		guizero.Text(box, text=" ")
-		guizero.PushButton(box, text=f"Read data from {i}", command=readData, args=[i])
+		guizero.PushButton(box, text=f"Read data from {i}", command=getHistory, args=[i])
 
 def getHistory(browser):
 	hist = []
